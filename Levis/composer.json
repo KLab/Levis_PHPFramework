@@ -1,0 +1,14 @@
+{
+    "name": "arai-y/levis",
+    "type": "project",
+    "require": {
+        "twig/twig": "^3.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arai Yuki",
+            "email": "arai-y@klab.com"
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+{% if has_notification %}
+
+  <div class="alert alert-{{ notification_level }}" roll="alert">
+    {{ notification_message|raw }}
+  </div>
+{% endif %}
