@@ -1,9 +1,13 @@
 <?php
+declare(strict_types=1);
+
 require_once('libs/helper.php');
 require_once('./libs/bootstrap.php');
+
 class Migration
 {
-    private $db;
+    private DB $db;
+
     public function __construct()
     {
         $this->db = DB::connect();
@@ -19,7 +23,7 @@ class Migration
         exec('rm -r tmp');
     }
 
-    private function createCurrentTableSchema()
+    private function createCurrentTableSchema(): void
     {
         $files = glob("./db/*.sql");
         foreach ($files as $file) {
@@ -27,7 +31,7 @@ class Migration
         }
     }
 
-    private function createOldTableSchema()
+    private function createOldTableSchema(): void
     {
         $tables = $this->db->getTables();
         foreach ($tables as $table) {

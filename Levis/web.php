@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1);
+
+require_once('libs/helper.php');
 require_once('libs/bootstrap.php');
 $url_info = $_SERVER['PATH_INFO'];
 
@@ -6,7 +9,7 @@ $parsed_url = explode('/', trim($url_info, '/'));
 
 $method = count($parsed_url) >= 2 ? $parsed_url[1] : 'index';
 $controller = camelize($parsed_url[0]. '_controller');
-$view = resolveFIlePath(__DIR__, "view/$parsed_url[0]/$method.php");
+$view = resolveFilePath(__DIR__, "view/$parsed_url[0]/$method.php");
 
 $logger = Logger::getInstance();
 try {

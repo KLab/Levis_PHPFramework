@@ -2,13 +2,14 @@
     "name": "arai-y/levis",
     "type": "project",
     "require": {
+        "php": ">=8.3",
         "twig/twig": "^3.1"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "Arai Yuki",
-            "email": "arai-y@klab.com"
+            "name": "xeon_lagunas",
+            "email": "xeon.lagunas@gmail.com"
         }
     ]
 }
