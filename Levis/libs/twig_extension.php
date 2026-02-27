@@ -1,12 +1,14 @@
 <?php
+declare(strict_types=1);
 
 use Twig\TwigFunction;
 
-class TwigExteinsion extends Twig\Extension\AbstractExtension
+class TwigExtension extends Twig\Extension\AbstractExtension
 {
     // ルートindexまでのURLをここに入れる
-    const APP_URL = "/index.php";
-    public function getFunctions()
+    public const string APP_URL = "/index.php";
+
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('url', [$this, 'url']),
@@ -15,17 +17,17 @@ class TwigExteinsion extends Twig\Extension\AbstractExtension
         ];
     }
 
-    public function url($url)
+    public function url(string $url): string
     {
         return self::APP_URL.$url;
     }
 
-    public function getFilePath($path)
+    public function getFilePath(string $path): string
     {
         return resolveFilePath(__DIR__, $path);
     }
 
-    public function json_encode($json)
+    public function json_encode(mixed $json): string
     {
         return json_encode($json);
     }

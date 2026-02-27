@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1);
+
+require_once('libs/helper.php');
 require_once('libs/bootstrap.php');
 $url_info = $_SERVER['PATH_INFO'];
 $parsed_url = explode('/', trim($url_info, '/'));

@@ -1,11 +1,13 @@
 <?php
+declare(strict_types=1);
 
 class AutoLoader
 {
-    private static $is_api = true;
-    public static function setIsApi($flag) { self::$is_api = $flag; }
+    private static bool $is_api = true;
 
-    private static function directories()
+    public static function setIsApi(bool $flag): void { self::$is_api = $flag; }
+
+    private static function directories(): array
     {
         static $dirs;
         if (!$dirs) {
@@ -22,14 +24,14 @@ class AutoLoader
         return $dirs;
     }
 
-    public static function loadClass($class)
+    public static function loadClass(string $class): void
     {
         foreach (self::directories() as $directory) {
             $file_name = underscore($class). ".php";
             $file_path = "{$directory}/{$file_name}";
             if (is_file($file_path)) {
                 require_once $file_path;
-                return true;
+                return;
             }
         }
 

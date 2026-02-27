@@ -1,15 +1,15 @@
 <?php
+declare(strict_types=1);
+
 require_once('libs/helper.php');
 require_once('libs/bootstrap.php');
 
 class Router
 {
-    /** @var Controller */
-    private $controller;
+    private ?Controller $controller = null;
 
     public function __construct()
     {
-        /** @var Logger */
         $logger = Logger::getInstance();
         try {
             if (!isset($_SERVER['PATH_INFO'])) {
@@ -18,11 +18,9 @@ class Router
             }
             $infos = explode('/', $_SERVER['PATH_INFO']);
             array_shift($infos);
-            /** @var bool */
             $is_api = $infos[0] === 'api';
             AutoLoader::setIsApi($is_api);
             $this->controller = $this->createController($is_api ? $infos[1] : $infos[0]);
-            /** @var string */
             $action = $this->getAction($infos, $is_api);
             $this->controller->$action();
             if ($is_api) {
@@ -52,19 +50,19 @@ class Router
         return count($infos) > 0 ? $infos[1] : 'index';
     }
 
-    private function executeApi()
+    private function executeApi(): void
     {
         echo json_encode($this->controller->getVars());
     }
 
-    private function renderWeb(string $view_path)
+    private function renderWeb(string $view_path): void
     {
         require_once('./vendor/autoload.php');
         require_once('./libs/twig_extension.php');
         $loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/cms/view');
         $twig = new Twig\Environment($loader);
-        $twig->addExtension(new TwigExteinsion());
-        $params = $this->controller ? $this->controller->getVars() : [];
+        $twig->addExtension(new TwigExtension());
+        $params = $this->controller?->getVars() ?? [];
         $params['has_notification'] = Session::exists('notification_message');
         if ($params['has_notification']) {
             $params['notification_level'] = Session::get('notification_level');
