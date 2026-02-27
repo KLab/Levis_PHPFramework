@@ -1,5 +1,7 @@
 <?php
-ini_set('display_errors', 1);
+declare(strict_types=1);
+
+ini_set('display_errors', '1');
 error_reporting(E_ALL);
 require_once(resolveFilePath(__DIR__, './config.php'));
 require_once(resolveFilePath(__DIR__, './autoloader.php'));

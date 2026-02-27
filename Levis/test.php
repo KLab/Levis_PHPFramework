@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 require_once('libs/helper.php');
 require_once("libs/bootstrap.php");
 require_once("./test/test_base.php");
